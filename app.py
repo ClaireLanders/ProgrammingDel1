@@ -19,7 +19,7 @@ def home():
     products = product_service.get_all_products()
     return render_template('index.html', products=products)
 
-#bills
+
 @app.route('/index')
 def show_products():
     products = product_service.get_all_products()
@@ -51,13 +51,16 @@ def login():
         userdao = UserDAO()
         user = userdao.getuserbyusername(username=username)
         if user is None:
+            flash('Invalid username or password', category='danger')
             return redirect(url_for('home'))
         if user.password != password:
-            flash('Incorrect username or password', category='error')
+            flash('Incorrect password', category='danger')
             return redirect(url_for('login'))
         elif user.user_type == 'administrator':
+            session['username']= user.username
             return redirect(url_for('admin'))
         elif user.user_type == 'customer':
+            session['username'] = user.username
             return redirect(url_for('home'))
     else:
         return render_template('login.html')
@@ -76,6 +79,11 @@ def add_to_cart(product_id):
     # initialise the session if it doesnt exist
     if 'cart' not in session:
         session['cart'] = []
+
+    #
+    if 'username' not in session:
+        flash('Username is required', category='error')
+        return redirect(url_for('login'))
 
     # check if product is already in cart
     cart = session.get('cart', [])
