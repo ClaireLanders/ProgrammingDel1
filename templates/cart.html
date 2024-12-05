@@ -14,18 +14,14 @@
                                 <div class="row">
 
                                   <div class="col-md-7 col-sm-12">
-                                    <h5 class="mb-3"><a href="#!" class="text-body"><i
+                                    <h5 class="mb-3"><a href="{{ url_for('home') }}" class="text-body"><i
                                           class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a></h5>
                                     <hr>
 
                                     <div class="d-flex justify-content-between align-items-center mb-4">
                                       <div>
                                         <p class="mb-1">Shopping cart</p>
-                                        <p class="mb-0">You have 4 items in your cart</p>
-                                      </div>
-                                      <div>
-                                        <p class="mb-0"><span class="text-muted">Sort by:</span> <a href="#!"
-                                            class="text-body">price <i class="fas fa-angle-down mt-1"></i></a></p>
+                                        <p class="mb-0">You have {{ session.get('cart', [])|length }} items in your cart</p>
                                       </div>
                                     </div>
 
@@ -67,8 +63,6 @@
                                           <div class="card-body">
                                             <div class="d-flex justify-content-between align-items-center mb-4">
                                               <h5 class="mb-0">Card details</h5>
-                                              <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
-                                                class="img-fluid rounded-3" style="width: 45px;" alt="Avatar">
                                             </div>
 
                                             <p class="small mb-2">Card type</p>
@@ -82,13 +76,13 @@
 
                                             <form class="mt-4">
                                               <div class="form-outline form-white mb-4">
-                                                <input type="text" id="typeName" class="form-control form-control-lg" siez="17"
+                                                <input type="text" id="typeName" class="form-control form-control-lg" size="17"
                                                   placeholder="Cardholder's Name" />
                                                 <label class="form-label" for="typeName">Cardholder's Name</label>
                                               </div>
 
                                               <div class="form-outline form-white mb-4">
-                                                <input type="text" id="typeText" class="form-control form-control-lg" siez="17"
+                                                <input type="text" id="typeText" class="form-control form-control-lg" size="17"
                                                   placeholder="1234 5678 9012 3457" minlength="19" maxlength="19" />
                                                 <label class="form-label" for="typeText">Card Number</label>
                                               </div>
@@ -116,7 +110,7 @@
 
                                             <div class="d-flex justify-content-between">
                                               <p class="mb-2">Subtotal</p>
-                                              <p class="mb-2">$4798.00</p>
+                                              <p class="mb-2">€{{ session.get('cart', [])|total_price }}</p>
                                             </div>
 
                                             <div class="d-flex justify-content-between">
@@ -126,7 +120,7 @@
 
                                             <div class="d-flex justify-content-between mb-4">
                                               <p class="mb-2">Total(Incl. taxes)</p>
-                                              <p class="mb-2">$4818.00</p>
+                                              <p class="mb-2">€total price</p>
                                             </div>
 
                                             <button type="button" class="btn btn-info btn-block btn-lg">

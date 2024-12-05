@@ -492,7 +492,7 @@ progress {
 }
 
 .lead2 {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 300;
 }
 
@@ -8213,6 +8213,14 @@ textarea.form-control-lg {
   background-image: var(--bs-gradient) !important;
 }
 
+
+/* my css*/
+.bg-gradient1 {
+  background-image: linear-gradient(to right, #354f52, #52796f);
+}
+
+
+}
 .user-select-all {
   -webkit-user-select: all !important;
      -moz-user-select: all !important;

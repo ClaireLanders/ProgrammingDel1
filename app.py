@@ -4,6 +4,7 @@ from flask import Flask, request, render_template, redirect, url_for, session, f
 from service.ProductService import ProductService
 from dao.productdao import ProductDAO
 from dao.UserDAO import UserDAO
+from model.models import Basket
 
 
 app = Flask(__name__)
@@ -12,6 +13,7 @@ app.secret_key = 'cab55a52341d5763e41fb92c77241b02'
 
 product_service = ProductService()
 user_dao = UserDAO()
+
 
 
 @app.route('/')
@@ -41,8 +43,8 @@ def admin():
         flash('You must be logged in to access the admin page.', category='danger')
         return redirect(url_for('login'))
     users = user_dao.get_all_users()
-    user = session['username']
-    return render_template('adminhome.html', users=users, user=user)
+    username = session['username']
+    return render_template('adminhome.html', users=users, username=username)
 
 
 # login
@@ -61,7 +63,7 @@ def login():
             flash('Incorrect password', category='danger')
             return redirect(url_for('login'))
         elif user.user_type == 'administrator':
-            session['username']= user.username
+            session['username'] = user.username
             return redirect(url_for('admin'))
         elif user.user_type == 'customer':
             session['username'] = user.username
@@ -106,9 +108,10 @@ def add_to_cart(product_id):
 def view_cart():
     cart = session.get('cart', [])
     products = [product_service.get_product_details(product_id) for product_id in cart]
+    basket = Basket
     # remove any None values in case a product was deleted
     products = [product for product in products if product is not None]
-    return render_template('cart.html', products=products)
+    return render_template('cart.html', products=products, basket=basket)
 
 # tutors
 # remove from cart

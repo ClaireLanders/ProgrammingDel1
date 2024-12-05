@@ -49,7 +49,7 @@ class User:
 
 
 class LineItem:
-    def __init__(self, product, quantity):
+    def __init__(self, product, quantity, shipping):
         """
         Represents an item in a shopping basket or order.
         """
@@ -60,6 +60,8 @@ class LineItem:
         self.product = product
         self.quantity = quantity
         self.total_price = self.product.price * self.quantity
+        # self.shipping = self.subtotal_price * 0.1
+        # self.total_price = self.subtotal_price + self.shipping
 
     def __repr__(self):
         return f"LineItem(Product: {self.product.name}, Quantity: {self.quantity}, Total: ${self.total_price:.2f})"
