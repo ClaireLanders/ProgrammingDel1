@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+        <!-- Product section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ url_for('static', filename='images/' + product.imageUrl) }}" alt="..." /></div>
+                    <div class="col-md-6">
+                        <h1 class="display-5 fw-bolder">{{ product.brand }} {{ product.name }}</h1>
+                        <div class="fs-5 mb-5">
+                            <span>€{{product.price}}</span>
+                        </div>
+                        <p class="lead">{{ product.description }}</p>
+                        <div class="d-flex">
+                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem"/>
+                            <form action="{{ url_for('add_to_cart', product_id=product.product_id) }}" method="POST">
+                                <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+                                    <i class="bi-cart-fill me-1"></i>
+                                    Add to cart
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="px-1 ">
+                <h2 class="display-7 fw-bolder">More About This Watch</h2>
+                <h3 class="display-8 fw-bolder">Basic Info</h3>
+                <p class ="lead2">Brand: {{ product.brand }}</p>
+                <hr>
+                <p class ="lead2">Model: {{ product.name }}</p>
+                <hr>
+                <p class="lead2">Watch Style: {{ product.style }}</p>
+                <h3 class="display-8 fw-bolder">Caliber</h3>
+                <p class="lead2">Movement: {{ product.movement_type }}</p>
+                <hr>
+                <p class="lead2">Power Reserve: {{ product.power_reserve }}</p>
+            <!-- seperate here -->
+                <h3 class="display-8 fw-bolder">Case</h3>
+                <hr>
+                <p class="lead2">Case Material: {{ product.case_material}}</p>
+                <hr>
+                <p class="lead2">Case Diameter: {{ product.case_diameter }}</p>
+                <hr>
+                <p class="lead2">Water Resistance: {{ product.water_resistance }}</p>
+                <hr>
+                <p class="lead2">Bezel Material: {{ product.bezel_material }}</p>
+                <hr>
+                <p class="lead2">Crystal: {{ product.crystal }}</p>
+                <hr>
+                <p class="lead2">Dial: {{ product.dial }}</p>
+                <h3 class="display-8 fw-bolder">Bracelet/Strap</h3>
+                <p class="lead2">Bracelet Material: {{ product.bracelet_material }}</p>
+                <hr>
+                <p class="lead2">Bracelet Colour: {{ product.bracelet_colour}}</p>
+                <hr>
+                <p class="lead2">Clasp: {{ product.clasp_type }}</p>
+                <hr>
+                <p class="lead2">Clasp Material: {{ product.clasp_material }}</p>
+        </section>
+{% endblock %}
