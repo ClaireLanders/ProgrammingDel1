@@ -37,8 +37,12 @@ def show_product(product_id):
 
 @app.route('/adminhome')
 def admin():
+    if 'username' not in session:
+        flash('You must be logged in to access the admin page.', category='danger')
+        return redirect(url_for('login'))
     users = user_dao.get_all_users()
-    return render_template('adminhome.html', users=users)
+    user = session['username']
+    return render_template('adminhome.html', users=users, user=user)
 
 
 # login
