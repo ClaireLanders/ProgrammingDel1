@@ -50,7 +50,7 @@ class User:
 
 
 class LineItem:
-    def __init__(self, product, quantity, shipping):
+    def __init__(self, product, quantity):
         """
         Represents an item in a shopping basket or order.
         """
@@ -61,8 +61,6 @@ class LineItem:
         self.product = product
         self.quantity = quantity
         self.total_price = self.product.price * self.quantity
-        # self.shipping = self.subtotal_price * 0.1
-        # self.total_price = self.subtotal_price + self.shipping
 
     def __repr__(self):
         return f"LineItem(Product: {self.product.name}, Quantity: {self.quantity}, Total: ${self.total_price:.2f})"
@@ -88,6 +86,7 @@ class Basket:
         return sum(item.total_price for item in self.items)
 
     def get_number_of_items(self):
+        """Returns the number of items in the basket."""
         return len(self.items)
 
     def __repr__(self):
@@ -111,38 +110,6 @@ class Transaction:
     def __repr__(self):
         return f"Transaction(ID: {self.transaction_id}, User: {self.user.username}, Total: ${self.total_amount:.2f})"
 
-def main():
-    # Step 1: Create sample products
-    product1 = Product(1, "Acoustic Guitar", "Yamaha", 199.99, "acoustic", "image1.jpg")
-    product2 = Product(2, "Electric Guitar", "Fender", 799.99, "electric", "image2.jpg")
-    product3 = Product(3, "Bass Guitar", "Ibanez", 499.99, "bass", "image3.jpg")
-
-    # Step 2: Create a user
-    customer = User(101, "john_doe", "john@example.com", "customer")
-
-    # Step 3: Create a basket and add products
-    basket = Basket()
-    print("Adding items to the basket...")
-    basket.add_item(product1, 2)  # Add 2 Acoustic Guitars
-    basket.add_item(product2, 1)  # Add 1 Electric Guitar
-    basket.add_item(product3, 3)  # Add 3 Bass Guitars
-
-    # Step 4: Display basket contents and total
-    print("\nBasket contents:")
-    for item in basket.items:
-        print(item)
-    print(f"Total Price: ${basket.calculate_total():.2f}")
-
-    # Step 5: Create a transaction
-    transaction = Transaction(1001, customer, basket)
-
-    # Step 6: Display transaction details
-    print("\nTransaction details:")
-    print(transaction)
 
 
 
-
-# Call the main function
-if __name__ == "__main__":
-    main()
