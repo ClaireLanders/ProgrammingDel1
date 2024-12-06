@@ -1,5 +1,5 @@
 class Product:
-    def __init__(self, product_id, name, brand, price, style, movement_type, bracelet_material, bracelet_colour, clasp_type, clasp_material, case_diameter, case_material, water_resistance, bezel_material, crystal, dial, power_reserve, image_url, description):
+    def __init__(self, product_id, name, brand, price, style, movement_type, bracelet_material, bracelet_colour, clasp_type, clasp_material, case_diameter, case_material, water_resistance, bezel_material, crystal, dial, power_reserve, image_url, description, stock):
         """
         Represents a product in the ecommerce store.
         """
@@ -22,6 +22,7 @@ class Product:
         self.power_reserve = power_reserve
         self.imageUrl = image_url
         self.description = description
+        self.stock = stock
 
 
 
